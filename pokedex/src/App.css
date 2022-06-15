@@ -1,11 +1,52 @@
-.arrow {
-  padding: 15px 20px;
-  border-radius: 50%;
-  font-size: 30px;
-  color: white;
-  margin: 25px;
-  background-color: #574f62;
-  border: none;
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+.flex-container > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media all and (min-width: 1232px) {
+  .top-flex-1 {
+    order: 1;
+  }
+  .title {
+    order: 2;
+  }
+  .top-flex-wide {
+    order: 3;
+  }
+  .right {
+    order: 4;
+  }
+}
+@media all and (max-width: 1232px) {
+  .title {
+    flex-grow: 1;
+  }
+  .flex-container {
+    justify-content: space-around;
+  }
+}
+@media all and (max-width: 537px) {
+  .top-flex-1 {
+    order: 1;
+    flex-grow: 1;
+    justify-content: space-evenly;
+  }
+  .right {
+    order: 2;
+    flex-grow: 1;
+    justify-content: space-evenly;
+  }
+  .title {
+    order: 3;
+  }
+  .top-flex-wide {
+    order: 4;
+  }
 }
 .search {
   background: url("/src/images/magnifying_glass.png") no-repeat left;
@@ -13,34 +54,54 @@
   padding-left: 50px;
   font-size: 50px;
 }
-.top {
+
+.center {
+  width: fit-content;
+  margin: auto;
+}
+.fill-window {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  top: 0px;
+}
+.arrow {
+  padding: 15px 20px;
+  border-radius: 50%;
+  font-size: 30px;
+  color: white;
+  margin: 10px;
+  background-color: #574f62;
+  border: none;
+}
+.inline-center {
   display: inline-flex;
   align-items: center;
+}
+
+.top {
   width: 100%;
   padding-top: 25px;
 }
 .back {
   transform: scale(-1, 1);
 }
+.top-flex-wide {
+  flex-grow: 1;
+  padding: 15px 10px;
+}
 .double {
   font-size: 50px;
   padding-top: 2px;
   padding-bottom: 7px;
 }
-.start {
-  margin-left: 50px;
-  margin-right: 0px;
-}
-.end {
-  margin-left: 0px;
-  margin-right: 50px;
-}
+
 .clear {
   font-size: 30px;
   padding: 12px;
   border-bottom-right-radius: 15px;
   border-top-right-radius: 15px;
-  border-left: none;
   border: 2px solid black;
   border-left: none;
   box-shadow: none;
@@ -49,13 +110,13 @@ input[type="text"] {
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   background-color: white;
-  width: 100%;
   border: 2px solid black;
+  width: 100%;
 }
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  width: 250px;
+  width: 275px;
   padding: 10px 20px;
   margin: 20px;
   border-radius: 10px;
@@ -65,17 +126,15 @@ input[type="text"] {
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
-.card-image {
-  height: 100%;
+.image {
   width: 100%;
-  display: block;
+  height: 100%;
 }
-.card-buttons {
+.types {
   float: right;
   display: inline-flex;
-  width: max-content;
 }
-.card-button {
+.type {
   margin: 5px;
   height: fit-content;
   width: fit-content;
@@ -87,44 +146,64 @@ input[type="text"] {
 .detail-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  width: 750px;
+  width: fit-content;
+  max-width: 750px;
   padding: 10px 20px;
-  margin: auto;
   border-radius: 15px;
   background-color: white;
   color: black;
-  margin-bottom: 59px;
 }
-.card-head {
-  display: flex;
-  align-items: center;
+@media all and (max-width: 815px) {
+  .detail-card {
+    margin: 0px 25px;
+  }
+}
+@media all and (min-width: 459px) {
+  .card-title {
+    justify-content: left;
+  }
+}
+.detail-image {
+  height: 300px;
+  width: 100%;
+  min-width: 300px;
+  flex-grow: 1;
+  display: table-cell;
 }
 .card-title {
   display: flex;
-  align-items: center;
-  width: 100%;
+  flex-grow: 1;
 }
-.container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.stats {
-  font-weight: bold;
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
+.flex-item {
+  flex-grow: 2;
+  display: block;
+}
+.pad {
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 15px;
+}
+.stats {
+  min-width: 250px;
+  font-weight: bold;
+}
 .statCell {
   width: 100%;
 }
 .statBar {
+  width: 100%;
   background-color: lightgrey;
-  padding: 4px;
-  padding-left: 0px;
-  margin-left: 10px;
 }
 .stat {
   background-color: #574f62;
   color: white;
-  padding: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 .profile {
   background-color: #574f62;
@@ -143,15 +222,34 @@ header {
   display: grid;
 }
 .page-title {
-  margin: auto;
   color: grey;
   font-weight: 400;
 }
 .app-title {
-  display: inline-block;
-  margin-right: 20px;
   font-weight: normal;
   font-size: 45px;
+  margin: 0px 10px;
+}
+
+.loading {
+  padding-top: 200px;
+  height: 100%;
+  width: 100%;
+  animation: fadeIn 1s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 #poison {

@@ -4,6 +4,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
   background-color: rgba(245, 235, 255, 0.75);
 }
 
