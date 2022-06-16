@@ -5,6 +5,7 @@ import StatRow from "./StatRow";
 import Invalid from "./Invalid";
 import Types from "./Types";
 import ProfileTable from "./ProfileTable";
+import { getIdWithZeros } from "../functions";
 
 const Detail = () => {
   const [pokemonInfo, setPokemonInfo] = useState({});
@@ -19,24 +20,21 @@ const Detail = () => {
         setPokemonInfo(json.data);
         setIsLoading(false);
       });
-  }, []);
+  });
 
-  if(!parseInt(page_id)){
-    return(
-      <Invalid/>
-    )
-  }
-  else if (!isLoading) {
+  if (!parseInt(page_id) || page_id > 553) {
+    return <Invalid />;
+  } else if (!isLoading) {
     const { id, name, image, types, height, weight, abilities, egg_groups, stats, genus, description } = pokemonInfo;
     return (
       <div className="fill-window" id={types[0]}>
         <header className="top inline-center">
-          <button onClick={() => navigate(-1)} className="arrow back">
+          <button onClick={() => navigate(-1)} className="arrow back fixed">
             &#10132;
           </button>
-          <h1 className="page-title center">{name}</h1>
+          <h1 className="page-title center detail-page-title">{name}</h1>
         </header>
-        <div className="detail-card center">
+        <div className="center detail-card">
           <div className="flex-container">
             <div className="card-title">
               <h1>{name} </h1>
@@ -47,7 +45,11 @@ const Detail = () => {
           <hr />
           <div className="flex-container">
             <div className="fle">
-              <img className="image detail-image" src={image} alt={name} />
+              <img
+                className="image detail-image"
+                src={"https://assets.pokemon.com/assets/cms2/img/pokedex/full/" + getIdWithZeros(id) + ".png"}
+                alt={name}
+              />
             </div>
             <div className="flex-item">
               <table className="stats">
@@ -69,9 +71,7 @@ const Detail = () => {
       </div>
     );
   } else {
-    return (
-      <Loading/>
-    );
+    return <Loading />;
   }
 };
 
