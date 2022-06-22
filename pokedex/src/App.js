@@ -38,13 +38,13 @@ const App = ({ context }) => {
   useEffect(() => {
     setIsLoading(true);
     setSearchParams({ name: name ? name : "", page: page ? page : 1 });
-    let url = "https://intern-pokedex.myriadapps.com/api/v1/pokemon?" + new URLSearchParams({ name, page });
+    const url = "https://intern-pokedex.myriadapps.com/api/v1/pokemon?" + new URLSearchParams({ name, page });
     if(page!==null){
       fetch(url)
       .then((res) => res.json())
-      .then((json) => {
-        setPokedex(json.data);
-        setMeta(json.meta);
+      .then(({data, meta}) => {
+        setPokedex(data);
+        setMeta(meta);
         setIsLoading(false);
       });
     }

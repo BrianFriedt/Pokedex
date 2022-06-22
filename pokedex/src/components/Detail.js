@@ -5,7 +5,6 @@ import StatRow from "./StatRow";
 import Invalid from "./Invalid";
 import Types from "./Types";
 import ProfileTable from "./ProfileTable";
-import { getIdWithZeros } from "../functions";
 
 const Detail = () => {
   const [pokemonInfo, setPokemonInfo] = useState({});
@@ -14,18 +13,18 @@ const Detail = () => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://intern-pokedex.myriadapps.com/api/v1/pokemon/" + page_id)
+    fetch(`https://intern-pokedex.myriadapps.com/api/v1/pokemon/${page_id}`)
       .then((res) => res.json())
-      .then((json) => {
-        setPokemonInfo(json.data);
+      .then(({data}) => {
+        setPokemonInfo(data);
         setIsLoading(false);
       });
   });
 
-  if (!parseInt(page_id) || page_id > 553) {
+  if (pokemonInfo===undefined) {
     return <Invalid />;
   } else if (!isLoading) {
-    const { id, name, image, types, height, weight, abilities, egg_groups, stats, genus, description } = pokemonInfo;
+    const { id, name, types, height, weight, abilities, egg_groups, stats, genus, description } = pokemonInfo;
     return (
       <div className="fill-window" id={types[0]}>
         <header className="top inline-center">
@@ -47,14 +46,14 @@ const Detail = () => {
             <div className="fle">
               <img
                 className="image detail-image"
-                src={"https://assets.pokemon.com/assets/cms2/img/pokedex/full/" + getIdWithZeros(id) + ".png"}
+                src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id.toString().padStart(3,"000")}.png`}
                 alt={name}
               />
             </div>
             <div className="flex-item">
               <table className="stats">
                 <tbody>
-                  {Object.entries(stats).map((stat) => (
+                  {Object.entries(stats).map( stat => (
                     <StatRow stat={stat[0]} value={stat[1]} key={stat} />
                   ))}
                 </tbody>

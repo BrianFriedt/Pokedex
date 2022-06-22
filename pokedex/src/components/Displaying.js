@@ -1,10 +1,7 @@
 import React from "react";
 
 const Displaying = ({ meta, isLoading }) => {
-  let displayingText = "";
-  if (meta.total !== 0) {
-    displayingText = `${meta.from} to ${meta.to} of `;
-  }
+  const displayingText = meta.total ? `${meta.from} to ${meta.to} of ` : "";
   if (isLoading) {
     return <></>;
   } else {

@@ -51,7 +51,8 @@ body {
 .search {
   background: url("/src/images/magnifying_glass.png") no-repeat left;
   background-size: 40px;
-  padding-left: 50px;
+  background-position: 10px;
+  padding-left: 55px;
   font-size: 50px;
 }
 
@@ -197,11 +198,10 @@ input[type="text"] {
   min-width: 250px;
   font-weight: bold;
 }
-.statCell {
+.stat-cell {
   width: 100%;
 }
-.statBar {
-  width: 100%;
+.stat-bar {
   background-color: lightgrey;
 }
 .stat {

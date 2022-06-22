@@ -1,8 +1,8 @@
 import React from "react";
 
 const StatRow = ({ stat, value }) => {
-  const getStyle = (stat) => {
-    const length = (stat / 255) * 100;
+  const getStyle = (value) => {
+    const length = (value / 255) * 100;
     return length + "%";
   };
 
@@ -11,8 +11,8 @@ const StatRow = ({ stat, value }) => {
       <td>
         <span>{stat.replaceAll("-", " ")}&nbsp;</span>
       </td>
-      <td className="statCell">
-        <div className="statBar">
+      <td className="stat-cell">
+        <div className="stat-bar">
           <p className="stat" style={{ width: getStyle(value) }}>
             &nbsp;{value}
           </p>
