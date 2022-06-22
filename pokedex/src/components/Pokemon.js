@@ -1,24 +1,15 @@
 import React from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Types from "./Types";
 
-const Pokemon = ({ pokemon }) => {
-let navigate = useNavigate();
-  
-  const handleClick = () => {
-    navigate("/pokemon/"+pokemon.id );
-  };
-  const { image, name, types } = pokemon;
+const Pokemon = ({ pokemon: { id, name, types } }) => {
+  let navigate = useNavigate();
+
   return (
-    <div className="card" onClick={handleClick}>
-      <h3 className="card-name">{name}</h3>
-      <img className="card-image" src={image} alt={name} />
-      <nav className="card-buttons">
-        {Object.keys(types).map((key) => (
-          <button className="card-button" id={types[key]} key={key}>
-            <span>{types[key]}</span>
-          </button>
-        ))}
-      </nav>
+    <div className="card" onClick={() => navigate("/pokemon/" + id)}>
+      <h3>{name}</h3>
+      <img className="image" src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id.toString().padStart(3,"000")}.png`} alt={name} />
+      <Types types={types} />
     </div>
   );
 };
